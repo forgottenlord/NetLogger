@@ -20,18 +20,30 @@ namespace ThunderServer_ClientSideTester.Forms
         {
             InitializeComponent();
             client = new TcpClient();
+            client.OnLog += WriteLog;
+            client.OnReseive += ReseiveMessage;
         }
 
         private void connectButton_Click(object sender, EventArgs e)
         {
-            client.OnLog += WriteLog;
-            client.OnReseive += ReseiveMessage;
+            connectButton.Enabled = false;
+            sendButton.Enabled = true;
+            disConnectButton.Enabled = true;
             client.Connect(serverIP.Text, int.Parse(serverPort.Text));
+        }
+
+        private void disConnectButton_Click(object sender, EventArgs e)
+        {
+            connectButton.Enabled = true;
+            sendButton.Enabled = false;
+            disConnectButton.Enabled = false;
+            ///TODO : поправить, уходит в бесконечный спам дисконнекта в логах
+            client.Disconnect();
         }
 
         private void TcpClientForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //client.Stop();
+            client.Disconnect();
         }
 
         private void sendButton_Click(object sender, EventArgs e)

@@ -20,17 +20,29 @@ namespace ThunderServer_ClientSideTester.Forms
         {
             InitializeComponent();
             server = new TcpServer();
-        }
-
-        private void connectButton_Click(object sender, EventArgs e)
-        {
             server.OnLog += WriteLog;
             server.OnReseive += WriteMessage;
             server.OnConnectedClient += AddClient;
             server.OnDisconnectedClient += RemoveClient;
+        }
 
-            if (!string.IsNullOrEmpty(serverPort.Text))
-                server.Start(int.Parse(serverPort.Text));
+
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(serverPort.Text)) return;
+
+            server.Start(int.Parse(serverPort.Text));
+
+            startButton.Enabled = false;
+            stopButton.Enabled = true;
+            sendButton.Enabled = true;
+        }
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            server.Stop();
+            startButton.Enabled = true;
+            stopButton.Enabled = false;
+            sendButton.Enabled = false;
         }
 
         private void TcpServerForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -42,6 +54,7 @@ namespace ThunderServer_ClientSideTester.Forms
         {
             server.Send((string)connectedClients.SelectedItem, sendMessage.Text);
         }
+
 
         private void TcpServerForm_Resize(object sender, EventArgs e)
         {

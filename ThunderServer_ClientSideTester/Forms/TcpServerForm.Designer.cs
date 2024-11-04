@@ -32,8 +32,8 @@
             this.sendButton = new System.Windows.Forms.Button();
             this.sendMessage = new System.Windows.Forms.TextBox();
             this.serverPort = new System.Windows.Forms.TextBox();
-            this.connectButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.startButton = new System.Windows.Forms.Button();
+            this.stopButton = new System.Windows.Forms.Button();
             this.connectedClients = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
@@ -49,6 +49,7 @@
             // 
             // sendButton
             // 
+            this.sendButton.Enabled = false;
             this.sendButton.Location = new System.Drawing.Point(278, 34);
             this.sendButton.Name = "sendButton";
             this.sendButton.Size = new System.Drawing.Size(87, 25);
@@ -74,24 +75,26 @@
             this.serverPort.TabIndex = 7;
             this.serverPort.Text = "80";
             // 
-            // connectButton
+            // startButton
             // 
-            this.connectButton.Location = new System.Drawing.Point(185, 5);
-            this.connectButton.Name = "connectButton";
-            this.connectButton.Size = new System.Drawing.Size(87, 25);
-            this.connectButton.TabIndex = 6;
-            this.connectButton.Text = "start";
-            this.connectButton.UseVisualStyleBackColor = true;
-            this.connectButton.Click += new System.EventHandler(this.connectButton_Click);
+            this.startButton.Location = new System.Drawing.Point(185, 5);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(87, 25);
+            this.startButton.TabIndex = 6;
+            this.startButton.Text = "start";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
-            // button1
+            // stopButton
             // 
-            this.button1.Location = new System.Drawing.Point(278, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 25);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "stop";
-            this.button1.UseVisualStyleBackColor = true;
+            this.stopButton.Enabled = false;
+            this.stopButton.Location = new System.Drawing.Point(278, 3);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(87, 25);
+            this.stopButton.TabIndex = 11;
+            this.stopButton.Text = "stop";
+            this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
             // connectedClients
             // 
@@ -107,12 +110,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(382, 450);
             this.Controls.Add(this.connectedClients);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.stopButton);
             this.Controls.Add(this.Logs);
             this.Controls.Add(this.sendButton);
             this.Controls.Add(this.sendMessage);
             this.Controls.Add(this.serverPort);
-            this.Controls.Add(this.connectButton);
+            this.Controls.Add(this.startButton);
             this.Name = "TcpServerForm";
             this.Text = "TcpServerForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TcpServerForm_FormClosing);
@@ -128,8 +131,8 @@
         private Button sendButton;
         private TextBox sendMessage;
         private TextBox serverPort;
-        private Button connectButton;
-        private Button button1;
+        private Button startButton;
+        private Button stopButton;
         private ComboBox connectedClients;
     }
 }
